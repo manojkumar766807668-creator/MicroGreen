@@ -12,6 +12,7 @@ import Use from "./pages/HowToUse";
 import Farm from "./pages/FarmVisits";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import { PageHero } from "./components/ui";
 
 export default function App() {
   const { pathname, hash } = useLocation();
@@ -22,6 +23,6 @@ export default function App() {
       <Routes><Route path="/" element={<Home />} /><Route path="/why-microgreens" element={<Why />} /><Route path="/products" element={<Products />} />
         <Route path="/products/:slug" element={<Detail />} /><Route path="/our-process" element={<Process />} /><Route path="/how-to-use" element={<Use />} />
         <Route path="/farm-visits" element={<Farm />} /><Route path="/about" element={<About />} /><Route path="/contact" element={<Contact />} />
-        <Route path="*" element={<Home />} /></Routes></main>
+        <Route path="*" element={<PageHero title="Page not found" sub="The page you requested does not exist." />} /></Routes></main>
     <Footer /><WhatsAppButton /></>;
 }

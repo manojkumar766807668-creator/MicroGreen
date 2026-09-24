@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { Btn } from "./ui";
 
-const links = [["/", "Home"], ["/why-microgreens", "Why Microgreens"], ["/products", "Products"], ["/our-process", "Our Process"], ["/how-to-use", "How to Use"], ["/farm-visits", "Farm Visits"], ["/about", "About"], ["/contact", "Contact"]];
+const links = [["/", "Home"], ["/products", "Products"], ["/about", "About"], ["/contact", "Contact"]];
+const learnLinks = [["/why-microgreens", "What are Microgreens"], ["/our-process", "How We Grow"], ["/how-to-use", "How to Eat"], ["/products", "Find My Microgreens"], ["/about", "Why Microgreens"]];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [learnOpen, setLearnOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { pathname } = useLocation();
   useEffect(() => { const f = () => setScrolled(window.scrollY > 40); f(); window.addEventListener("scroll", f, { passive: true }); return () => window.removeEventListener("scroll", f); }, []);
-  useEffect(() => setOpen(false), [pathname]);
+  useEffect(() => { setOpen(false); setLearnOpen(false); }, [pathname]);
   useEffect(() => { document.body.style.overflow = open ? "hidden" : ""; const k = (e) => e.key === "Escape" && setOpen(false); window.addEventListener("keydown", k); return () => window.removeEventListener("keydown", k); }, [open]);
   const overHero = pathname === "/" && !scrolled && !open;
   return (
@@ -23,8 +25,12 @@ export default function Navbar() {
             <span>Explore</span>
             <span className="menu-mark" aria-hidden="true">mg</span>
           </div>
-          {links.map(([to, t]) => <NavLink key={to} to={to} end={to === "/"} className="navlink">{t}</NavLink>)}
-          <Btn to="/products" className="nav-cta">Explore Products</Btn>
+          {links.slice(0, 2).map(([to, t]) => <NavLink key={to} to={to} end={to === "/"} className="navlink">{t}</NavLink>)}
+          <div className={`learn-menu ${learnOpen ? "open" : ""}`}>
+            <button className="navlink learn-toggle" aria-expanded={learnOpen} onClick={() => setLearnOpen(!learnOpen)}>Learn <ChevronDown size={15} aria-hidden="true" /></button>
+            <div className="learn-dropdown">{learnLinks.map(([to, t]) => <NavLink key={t} to={to} className="learn-link">{t}</NavLink>)}</div>
+          </div>
+          {links.slice(2).map(([to, t]) => <NavLink key={to} to={to} end className="navlink">{t}</NavLink>)}
         </nav>
         <button className="burger" aria-expanded={open} aria-controls="menu" aria-label={open ? "Close menu" : "Open menu"} onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button>
       </div>

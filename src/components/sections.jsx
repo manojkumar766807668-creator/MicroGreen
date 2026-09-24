@@ -94,7 +94,7 @@ export function FarmBand() {
 export function ShareBand() {
   const [toast, show] = useToast();
   return <section className="sec share-band"><div className="wrap center"><h2>Found something fresh?<br />Share it with someone who'd love it.</h2>
-    <Btn onClick={() => nativeShare(window.location.origin, "mini's greens", show)}><Share2 size={16} aria-hidden="true" />Share mini's greens</Btn>{toast}</div></section>;
+    <Btn type="button" onClick={() => nativeShare(window.location.href, "mini's greens", show)}><Share2 size={16} aria-hidden="true" />Share mini's greens</Btn>{toast}</div></section>;
 }
 
 export function FAQ() {
