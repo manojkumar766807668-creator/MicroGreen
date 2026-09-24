@@ -16,7 +16,7 @@ export default function About() {
   return <main className="about-page">
     <section className="about-hero">
       <div className="wrap about-hero-in">
-        <Reveal><p className="label">About mini's greens</p><h1>Fresh greens<br /><em>for everyday living.</em></h1></Reveal>
+        <Reveal><p className="label">About mini's greens</p><h1>Fresh greens<br /><em>for everyday living.</em></h1><p className="small">By Manoj Kumar</p></Reveal>
         <Reveal delay={120} className="about-hero-note"><p>Small plants, thoughtful growing and simple ways to make everyday food feel fresher.</p><ArrowUpRight aria-hidden="true" /></Reveal>
       </div>
     </section>
