@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import WhatsAppButton from "./components/WhatsAppButton";
 import Home from "./pages/Home";
 import Why from "./pages/WhyMicrogreens";
+import WhatMicrogreens from "./pages/WhatMicrogreens";
 import Products from "./pages/Products";
 import Detail from "./pages/ProductDetails";
 import Process from "./pages/OurProcess";
@@ -20,7 +21,7 @@ export default function App() {
   return <>
     <a href="#main" className="skip">Skip to content</a><Navbar />
     <main id="main" key={pathname} className="page">
-      <Routes><Route path="/" element={<Home />} /><Route path="/why-microgreens" element={<Why />} /><Route path="/products" element={<Products />} />
+      <Routes><Route path="/" element={<Home />} /><Route path="/what-are-microgreens" element={<WhatMicrogreens />} /><Route path="/why-microgreens" element={<Why />} /><Route path="/products" element={<Products />} />
         <Route path="/products/:slug" element={<Detail />} /><Route path="/our-process" element={<Process />} /><Route path="/how-to-use" element={<Use />} />
         <Route path="/farm-visits" element={<Farm />} /><Route path="/about" element={<About />} /><Route path="/contact" element={<Contact />} />
         <Route path="*" element={<PageHero title="Page not found" sub="The page you requested does not exist." />} /></Routes></main>

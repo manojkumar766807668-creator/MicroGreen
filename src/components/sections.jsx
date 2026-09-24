@@ -80,7 +80,7 @@ export function ProcessPreview() {
 export function UseCases({ all }) {
   const list = all ? useCases : useCases.slice(0, 3);
   return <section className="sec"><div className="wrap"><Heading title="A little green goes a long way" />
-    <div className="uses">{list.map((u, i) => <Reveal key={u.name} className={`use u${i}`} delay={i * 60}><Img src={u.image} alt={u.name} /><div><h3>{u.name}</h3>{u.text !== "[CONTENT REQUIRED]" && <p>{u.text}</p>}{u.placement !== "[CONTENT REQUIRED]" && <p className="small">Where the greens go: {u.placement}</p>}{u.product !== "[CONTENT REQUIRED]" && <p className="small">Product used: {u.product}</p>}</div></Reveal>)}</div>
+    <div className={`uses ${all ? "uses-detailed" : "uses-preview"}`}>{list.map((u, i) => <Reveal key={u.name} className={`use u${i}`} delay={i * 60}><Img src={u.image} alt={u.name} /><div><h3>{u.name}</h3>{u.text !== "[CONTENT REQUIRED]" && (all ? <p>{u.text}</p> : <p>{u.text.split(". ")[0]}.</p>)}{all && u.placement !== "[CONTENT REQUIRED]" && <p className="small">Where the greens go: {u.placement}</p>}{all && u.product !== "[CONTENT REQUIRED]" && <p className="small">Product used: {u.product}</p>}</div></Reveal>)}</div>
     {!all && <Btn to="/how-to-use">See more ways</Btn>}</div></section>;
 }
 
@@ -88,7 +88,7 @@ export function FarmBand() {
   return <section className="sec farm"><div className="wrap"><h2 className="giant">Come see where<br />the greens begin.</h2>
     <p className="lead">Step beyond the screen and experience the journey behind your greens. Discover how microgreens are grown, explore their journey from seed to harvest, and get a closer look at the growing process.</p>
     <dl className="facts"><div><dt>What you'll see</dt><dd>Explore the growing environment, see the different stages of the microgreen journey, and learn how young plants develop before harvest.</dd></div><div><dt>Duration</dt><dd>Visit duration: To be confirmed.</dd></div><div><dt>Who it's for</dt><dd>Farm visits are for people interested in learning more about microgreens, their growing journey, and everyday use.</dd></div></dl>
-    <Btn to="/farm-visits">Plan Your Visit</Btn></div></section>;
+    <Btn to="/farm-visits#visit-form">Plan Your Visit</Btn></div></section>;
 }
 
 export function ShareBand() {

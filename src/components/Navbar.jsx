@@ -4,7 +4,7 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { Btn } from "./ui";
 
 const links = [["/", "Home"], ["/products", "Products"], ["/about", "About"], ["/contact", "Contact"]];
-const learnLinks = [["/why-microgreens", "What are Microgreens"], ["/our-process", "How We Grow"], ["/how-to-use", "How to Eat"], ["/products", "Find My Microgreens"], ["/about", "Why Microgreens"]];
+const learnLinks = [["/what-are-microgreens", "What are Microgreens"], ["/our-process", "How We Grow"], ["/how-to-use", "How to Eat"], ["/products", "Find My Microgreens"], ["/why-microgreens", "Why Microgreens"], ["/farm-visits", "Farm Visits"]];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
