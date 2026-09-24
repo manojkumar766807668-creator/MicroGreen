@@ -1,14 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Btn } from "./ui";
+import { useLanguage } from "../config/i18n";
 
 const slides = [
-  { label: "mini's greens", title: <>Small greens.<br />Big everyday possibilities.</>, text: "Discover fresh microgreens grown with care.", a: ["/products", "Explore Products"], b: ["/farm-visits", "Plan a Farm Visit"] },
-  { label: "What are microgreens?", title: <>Tiny plants.<br />Big stage.</>, text: "See how a seed becomes a microgreen.", a: ["/why-microgreens", "Why Microgreens"], b: ["/our-process", "Our Process"] },
-  { label: "Farm visits", title: <>Come see where<br />the greens begin.</>, text: "Plan a visit to the farm.", a: ["/farm-visits", "Plan Your Visit"], b: ["/how-to-use", "How to Use"] }
+  { label: "mini's greens", title: ["Small greens.", "Big everyday possibilities."], text: "Discover fresh microgreens grown with care.", a: ["/products", "Explore Products"], b: ["/farm-visits", "Plan a Farm Visit"] },
+  { label: "What are microgreens?", title: ["Tiny plants.", "Big stage."], text: "See how a seed becomes a microgreen.", a: ["/why-microgreens", "Why Microgreens"], b: ["/our-process", "Our Process"] },
+  { label: "Farm visits", title: ["Come see where", "the greens begin."], text: "Plan a visit to the farm.", a: ["/farm-visits", "Plan Your Visit"], b: ["/how-to-use", "How to Use"] }
 ];
 
 export default function HeroCarousel() {
+  const { t } = useLanguage();
   const [n, setN] = useState(0);
   const [paused, setPaused] = useState(false);
   const startX = useRef(null);
@@ -29,7 +31,7 @@ export default function HeroCarousel() {
       <div className="wrap hero-slides" aria-live={paused ? "polite" : "off"}>
         {slides.map((s, i) => { const T = i === 0 ? "h1" : "h2"; return (
           <div key={s.label} className={`hero-slide ${i === n ? "on" : ""}`} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${slides.length}`} aria-hidden={i !== n}>
-            <p className="label">{s.label}</p><T className="hero-title">{s.title}</T><p className="lead">{s.text}</p>
+            <p className="label">{t(s.label)}</p><T className="hero-title">{t(s.title[0])}<br />{t(s.title[1])}</T><p className="lead">{t(s.text)}</p>
             <div className="row"><Btn to={s.a[0]}>{s.a[1]}</Btn><Btn to={s.b[0]} variant="ghost">{s.b[1]}</Btn></div>
           </div>); })}
       </div>

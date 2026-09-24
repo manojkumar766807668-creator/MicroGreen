@@ -9,6 +9,7 @@ import { useCases } from "../data/useCases";
 import { faqs } from "../data/faqs";
 import { nativeShare } from "../utils/sharing";
 import { req } from "../config/siteConfig";
+import { useLanguage } from "../config/i18n";
 
 const stages = [["Seed", "Where every plant begins."], ["Sprout", "The seed wakes up."], ["Microgreen", "First leaves open. This is the stage we harvest."], ["Mature plant", "The full-grown vegetable or herb."]];
 const trustPoints = [
@@ -20,20 +21,21 @@ const trustPoints = [
 
 export function WhatIs() {
   const [on, setOn] = useState(2);
+  const { t } = useLanguage();
   return <section className="sec what-is"><div className="wrap about-split">
     <Reveal className="about-visual" aria-hidden="true">
       <img className="about-produce" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5zAs5Xyjs2tMuHpH0HV5YFuvkJCw1D2-tFelaKeNumHD7zDL-E8RRhwQ&s=10" alt="" />
       <img className="about-inset" src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=500&q=85" alt="" />
     </Reveal>
     <Reveal className="about-copy" delay={100}>
-      <h2>Tiny Plants, Big Impact</h2>
+      <h2>{t("Tiny Plants, Big Impact")}</h2>
       <p className="lead">Mini's greens is a homegrown microgreens brand on a mission to make healthy living simple and sustainable. We grow science-backed, nutrient-rich greens with care and purpose, connecting people to real, natural nutrition.</p>
       <Btn to="/about">Read more</Btn>
     </Reveal>
   </div>
-    <div className="wrap stages" role="tablist" aria-label="Growth stages">{stages.map(([t, d], i) => (
-      <button key={t} role="tab" aria-selected={on === i} className={`stage ${on === i ? "on" : ""}`} onClick={() => setOn(i)}>
-        <span className={`plant p${i}`} aria-hidden="true" /><strong>{t}</strong><span className="small">{d}</span></button>))}</div></section>;
+    <div className="wrap stages" role="tablist" aria-label="Growth stages">{stages.map(([title, description], i) => (
+      <button key={title} role="tab" aria-selected={on === i} className={`stage ${on === i ? "on" : ""}`} onClick={() => setOn(i)}>
+        <span className={`plant p${i}`} aria-hidden="true" /><strong>{t(title)}</strong><span className="small">{t(description)}</span></button>))}</div></section>;
 }
 
 const vs = {
@@ -54,14 +56,16 @@ const why = [
   [Heart, "Wellness", "A fresh everyday choice", "Make your everyday meals more colourful, fresh and interesting with microgreens."]
 ];
 export function Why() {
+  const { t } = useLanguage();
   return <section className="sec"><div className="wrap why">
-    <h2 className="giant why-c">Small plants.<br />A fresh way to eat.</h2>
-    {why.map(([I, t, heading, text], i) => <Reveal key={t} className={`why-b w${i}`} delay={i * 80}><span className="big-n">{i + 1}</span><I aria-hidden="true" /><h3>{t}</h3><strong>{heading}</strong><p>{text}</p></Reveal>)}</div></section>;
+    <h2 className="giant why-c">{t("Small plants.")}<br />{t("A fresh way to eat.")}</h2>
+    {why.map(([I, category, heading, text], i) => <Reveal key={category} className={`why-b w${i}`} delay={i * 80}><span className="big-n">{i + 1}</span><I aria-hidden="true" /><h3>{t(category)}</h3><strong>{t(heading)}</strong><p>{t(text)}</p></Reveal>)}</div></section>;
 }
 
 export function Trust() {
-  return <section className="sec dark"><div className="wrap"><h2 className="giant">Grown with intention.</h2>
-    <ul className="trust">{trustPoints.map(([title, text]) => <li key={title}><h3>{title}</h3><p>{text}</p></li>)}</ul></div></section>;
+  const { t } = useLanguage();
+  return <section className="sec dark"><div className="wrap"><h2 className="giant">{t("Grown with intention.")}</h2>
+    <ul className="trust">{trustPoints.map(([title, text]) => <li key={title}><h3>{t(title)}</h3><p>{t(text)}</p></li>)}</ul></div></section>;
 }
 
 export function Featured() {
@@ -85,15 +89,17 @@ export function UseCases({ all }) {
 }
 
 export function FarmBand() {
-  return <section className="sec farm"><div className="wrap"><h2 className="giant">Come see where<br />the greens begin.</h2>
-    <p className="lead">Step beyond the screen and experience the journey behind your greens. Discover how microgreens are grown, explore their journey from seed to harvest, and get a closer look at the growing process.</p>
+  const { t } = useLanguage();
+  return <section className="sec farm"><div className="wrap"><h2 className="giant">{t("Come see where the greens begin.")}</h2>
+    <p className="lead">{t("Step beyond the screen and experience the journey behind your greens. Discover how microgreens are grown, explore their journey from seed to harvest, and get a closer look at the growing process.")}</p>
     <dl className="facts"><div><dt>What you'll see</dt><dd>Explore the growing environment, see the different stages of the microgreen journey, and learn how young plants develop before harvest.</dd></div><div><dt>Duration</dt><dd>Visit duration: To be confirmed.</dd></div><div><dt>Who it's for</dt><dd>Farm visits are for people interested in learning more about microgreens, their growing journey, and everyday use.</dd></div></dl>
     <Btn to="/farm-visits#visit-form">Plan Your Visit</Btn></div></section>;
 }
 
 export function ShareBand() {
   const [toast, show] = useToast();
-  return <section className="sec share-band"><div className="wrap center"><h2>Found something fresh?<br />Share it with someone who'd love it.</h2>
+  const { t } = useLanguage();
+  return <section className="sec share-band"><div className="wrap center"><h2>{t("Found something fresh?")}<br />{t("Share it with someone who'd love it.")}</h2>
     <Btn type="button" onClick={() => nativeShare(window.location.href, "mini's greens", show)}><Share2 size={16} aria-hidden="true" />Share mini's greens</Btn>{toast}</div></section>;
 }
 
