@@ -21,6 +21,6 @@ export const faqs = [
   },
   {
     q: "How can I contact mini's greens?",
-    a: "You can contact mini's greens by WhatsApp or phone at 7978979898, by email at microgreen@gmail.com, or visit the listed address at Hyderabad, Malla Reddy College."
+    a: "You can contact mini's greens by WhatsApp or phone at 7668951570, by email at sonu21551715@gmail.com, or visit the listed address at Hyderabad, Malla Reddy College."
   }
 ];
