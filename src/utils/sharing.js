@@ -1,10 +1,16 @@
-export async function copyLink(url, toast, msg = "Link copied!") {
-  try { await navigator.clipboard.writeText(url); toast(msg); } catch { toast("Could not copy link"); }
+export async function copyLink(url, show) {
+  try {
+    await navigator.clipboard.writeText(url);
+    show("Link copied!");
+  } catch (error) {
+    console.error("Copy failed:", error);
+    show("Unable to copy link");
+  }
 }
 
 export async function nativeShare(url, title, toast) {
   if (navigator.share) {
-    try { await navigator.share({ title, url }); } catch { /* cancelled */ }
+    try { await navigator.share({ title, text: `${title} ${url}`, url }); } catch { /* cancelled */ }
   } else {
     copyLink(url, toast);
   }

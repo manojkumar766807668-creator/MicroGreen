@@ -9,6 +9,5 @@ export default function ShareButtons({ title }) {
     <button type="button" onClick={() => nativeShare(url, title, show)} aria-label="Share"><Share2 size={18} /></button>
     <a href={l.wa} target="_blank" rel="noreferrer" aria-label="Share on WhatsApp"><MessageCircle size={18} /></a>
     <a href={l.fb} target="_blank" rel="noreferrer" aria-label="Share on Facebook"><Facebook size={18} /></a>
-    <a href={l.ig} target="_blank" rel="noreferrer" aria-label="Share on Instagram"><Instagram size={18} /></a>
-    <button type="button" onClick={() => copyLink(url, show)} aria-label="Copy link"><Link2 size={18} /></button>{toast}</div>;
+    <a href="https://www.instagram.com/direct/new/" onClick={() => copyLink(url, show)} target="_blank" rel="noreferrer" aria-label="Share on Instagram"><Instagram size={18} /></a>{toast}</div>;
 }
