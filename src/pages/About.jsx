@@ -1,5 +1,6 @@
 import { ArrowUpRight, BookOpen, Heart, Leaf, Sparkles, Users } from "lucide-react";
 import { Btn, Reveal } from "../components/ui";
+import { siteConfig as c } from "../config/siteConfig";
 import { useSEO } from "../hooks/useSEO";
 
 const values = [
@@ -22,7 +23,7 @@ export default function About() {
     </section>
 
     <section className="sec about-intro"><div className="wrap about-intro-grid">
-      <Reveal><p className="label">Why we exist</p><h2>Fresh greens should feel approachable, not complicated.</h2></Reveal>
+      <Reveal><div className="about-intro-visual"><img src={c.contactImage} alt="Fresh sunflower microgreens" loading="lazy" /></div><p className="label">Why we exist</p><h2>Fresh greens should feel approachable, not complicated.</h2></Reveal>
       <Reveal delay={100}><p className="about-copy-large">At <strong>mini's greens</strong>, we believe that discovering better food choices starts with understanding what we eat. Microgreens may be small, but they bring colour, texture and flavour to everyday meals. Our aim is to make them easier to understand, easier to use and easier to include in the foods people already enjoy.</p><p>Whether someone is completely new to microgreens or already enjoys them, we want to provide a clear place to learn about young plants, explore different varieties and discover simple ways to bring them into everyday meals.</p></Reveal>
     </div></section>
 
