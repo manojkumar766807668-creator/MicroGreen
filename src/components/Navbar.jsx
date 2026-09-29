@@ -6,7 +6,7 @@ import { languages, useLanguage } from "../config/i18n";
 const links = [["/#home", "Home"], ["/#products", "Products"], ["/#about", "About"], ["/#contact", "Contact"]];
 const learnLinks = [["/what-are-microgreens", "What are microgreens?"], ["/our-process", "How we grow"], ["/how-to-use", "How to eat them"], ["/why-microgreens", "Why microgreens"], ["/#farm-visit", "Farm Visit"]];
 
-export default function Navbar() {
+export default function Navbar({ onSectionNavigate }) {
   const [open, setOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -20,6 +20,14 @@ export default function Navbar() {
   const handleNavClick = (event, to) => {
     setOpen(false);
     const target = new URL(to, window.location.origin);
+    const sectionId = target.hash ? decodeURIComponent(target.hash.slice(1)) : ({
+      "/our-process": "growing-process",
+      "/why-microgreens": "why-microgreens",
+      "/what-are-microgreens": "what-are-microgreens",
+      "/how-to-use": "how-to-eat",
+      "/farm-visits": "farm-visit",
+    }[target.pathname]);
+    if (target.origin === window.location.origin && sectionId) onSectionNavigate?.(sectionId);
     if (target.pathname === pathname && target.hash === hash) {
       event.preventDefault();
       if (target.hash) {
@@ -27,9 +35,7 @@ export default function Navbar() {
         requestAnimationFrame(() => {
           const section = document.getElementById(id);
           if (!section) return;
-          const navHeight = document.querySelector(".nav")?.getBoundingClientRect().height ?? 0;
-          const top = section.getBoundingClientRect().top + window.scrollY - navHeight;
-          window.scrollTo({ top, behavior: "smooth" });
+          section.scrollIntoView({ behavior: "smooth", block: "start" });
         });
       } else window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     }

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -9,19 +9,56 @@ import { PageHero } from "./components/ui";
 
 export default function App() {
   const { pathname, hash } = useLocation();
+  const scrollFloor = useRef(null);
+  const navigateToSection = useCallback((id) => {
+    const target = document.getElementById(id);
+    if (!target) return;
+    const margin = Number.parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+    const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - margin);
+    scrollFloor.current = top;
+    window.scrollTo({ top, behavior: "instant" });
+  }, []);
+  useEffect(() => {
+    let touchStartY = 0;
+    const blockScrollAboveFloor = (event) => {
+      if (scrollFloor.current !== null && window.scrollY <= scrollFloor.current + 2 && event.deltaY < 0) {
+        event.preventDefault();
+      }
+    };
+    const rememberTouch = (event) => { touchStartY = event.touches[0]?.clientY ?? 0; };
+    const blockTouchAboveFloor = (event) => {
+      const touchY = event.touches[0]?.clientY ?? touchStartY;
+      if (scrollFloor.current !== null && window.scrollY <= scrollFloor.current + 2 && touchY > touchStartY) {
+        event.preventDefault();
+      }
+    };
+    const enforceFloor = () => {
+      if (scrollFloor.current !== null && window.scrollY < scrollFloor.current) {
+        window.scrollTo({ top: scrollFloor.current, behavior: "instant" });
+      }
+    };
+    window.addEventListener("wheel", blockScrollAboveFloor, { passive: false });
+    window.addEventListener("touchstart", rememberTouch, { passive: true });
+    window.addEventListener("touchmove", blockTouchAboveFloor, { passive: false });
+    window.addEventListener("scroll", enforceFloor, { passive: true });
+    return () => {
+      window.removeEventListener("wheel", blockScrollAboveFloor);
+      window.removeEventListener("touchstart", rememberTouch);
+      window.removeEventListener("touchmove", blockTouchAboveFloor);
+      window.removeEventListener("scroll", enforceFloor);
+    };
+  }, []);
   useEffect(() => {
     if (!hash) { window.scrollTo({ top: 0, left: 0, behavior: "instant" }); return; }
     const id = decodeURIComponent(hash.slice(1));
     requestAnimationFrame(() => {
       const target = document.getElementById(id);
       if (!target) return;
-      const navHeight = document.querySelector(".nav")?.getBoundingClientRect().height ?? 0;
-      const top = target.getBoundingClientRect().top + window.scrollY - navHeight;
-      window.scrollTo({ top, behavior: "smooth" });
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   }, [pathname, hash]);
   return <>
-    <a href="#main" className="skip">Skip to content</a><Navbar />
+    <a href="#main" className="skip">Skip to content</a><Navbar onSectionNavigate={navigateToSection} />
     <main id="main" key={pathname} className="page">
       <Routes><Route path="/" element={<Home />} /><Route path="/products/:slug" element={<Detail />} />
         <Route path="/products" element={<Navigate to="/#products" replace />} /><Route path="/about" element={<Navigate to="/#about" replace />} /><Route path="/contact" element={<Navigate to="/#contact" replace />} />
