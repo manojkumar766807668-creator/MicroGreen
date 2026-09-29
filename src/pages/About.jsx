@@ -1,4 +1,4 @@
-import { ArrowUpRight, BookOpen, Heart, Leaf, Sparkles, Users } from "lucide-react";
+import { ArrowUpRight, BookOpen, Heart, Leaf, MapPin, Sparkles, Users } from "lucide-react";
 import { Btn, Reveal } from "../components/ui";
 import { siteConfig as c } from "../config/siteConfig";
 import { useSEO } from "../hooks/useSEO";
@@ -14,7 +14,7 @@ const everydayFoods = ["Sandwiches", "Wraps", "Salads", "Dosa", "Poha", "Dal", "
 
 export default function About() {
   useSEO("About", "Learn about mini's greens and our approach to fresh, everyday microgreens.");
-  return <main className="about-page">
+  return <div className="about-page">
     <section className="about-hero">
       <div className="wrap about-hero-in">
         <Reveal><p className="label">About mini's greens</p><h1>Fresh greens<br /><em>for everyday living.</em></h1><p className="small">By Manoj Kumar</p></Reveal>
@@ -24,7 +24,7 @@ export default function About() {
 
     <section className="sec about-intro"><div className="wrap about-intro-grid">
       <Reveal><div className="about-intro-visual"><img src={c.contactImage} alt="Fresh sunflower microgreens" loading="lazy" /></div><p className="label">Why we exist</p><h2>Fresh greens should feel approachable, not complicated.</h2></Reveal>
-      <Reveal delay={100}><p className="about-copy-large">At <strong>mini's greens</strong>, we believe that discovering better food choices starts with understanding what we eat. Microgreens may be small, but they bring colour, texture and flavour to everyday meals. Our aim is to make them easier to understand, easier to use and easier to include in the foods people already enjoy.</p><p>Whether someone is completely new to microgreens or already enjoys them, we want to provide a clear place to learn about young plants, explore different varieties and discover simple ways to bring them into everyday meals.</p></Reveal>
+      <Reveal delay={100}><p className="about-copy-large">At <strong>mini's greens</strong>, we believe that discovering better food choices starts with understanding what we eat. Microgreens may be small, but they bring colour, texture and flavour to everyday meals. Our aim is to make them easier to understand, easier to use and easier to include in the foods people already enjoy.</p><p>Whether someone is completely new to microgreens or already enjoys them, we want to provide a clear place to learn about young plants, explore different varieties and discover simple ways to bring them into everyday meals.</p><p className="about-location"><MapPin size={17} aria-hidden="true" /><span>Find us in <a href={c.mapUrl} target="_blank" rel="noreferrer">{c.address}</a>. Please contact us ahead to plan a visit.</span></p></Reveal>
     </div></section>
 
     <section className="about-purpose"><div className="wrap about-purpose-grid">
@@ -46,5 +46,5 @@ export default function About() {
     <section className="sec about-values"><div className="wrap"><Reveal><p className="label">Our values</p><h2>What guides the way we grow.</h2></Reveal><div className="values-grid">{values.map(([Icon, title, text], i) => <Reveal key={title} delay={i * 60} className="value-item"><Icon aria-hidden="true" /><h3>{title}</h3><p>{text}</p></Reveal>)}</div></div></section>
 
     <section className="about-vision"><div className="wrap about-vision-in"><Reveal><p className="label">Our vision</p><h2>Discover. Learn.<br /><em>Explore. Experience.</em></h2></Reveal><Reveal delay={120}><p>We envision a future where microgreens are not seen as complicated or unfamiliar, but as a simple and approachable part of everyday food. We want mini's greens to be a place where people can understand the first stages of growth and find a place for fresh greens on their own plate.</p><Btn to="/how-to-use">Explore everyday uses</Btn></Reveal></div></section>
-  </main>;
+  </div>;
 }

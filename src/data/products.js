@@ -17,6 +17,8 @@ const make = (i) => ({
   shelfLife: R,
   storage: R,
   bestWaysToUse: [],
+  packSizes: [],
+  price: null,
   farmConfirmationRequired: false
 });
 

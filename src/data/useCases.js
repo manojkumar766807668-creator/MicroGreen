@@ -1,5 +1,5 @@
 const R = "[CONTENT REQUIRED]";
-export const useCases = ["Sandwich", "Wrap", "Dal", "Poha", "Dosa", "Breakfast Bowl", "Soup"].map((name) => ({ name, text: R, placement: R, product: R, image: "" }));
+export const useCases = ["Sandwich", "Wrap", "Dal", "Poha", "Dosa", "Breakfast Bowl"].map((name) => ({ name, text: R, placement: R, product: R, image: "" }));
 useCases[0] = {
 	name: "Sandwich",
 	image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYzVtnUxePBRtRaWMPmFrxd2-yH6angkP8h2p0jPvHMg&s=10",
@@ -41,12 +41,5 @@ useCases[5] = {
 	text: "Start the day with a simple breakfast bowl topped with fresh microgreens. They can be paired with familiar ingredients such as vegetables, eggs, paneer, grains or other breakfast favourites. Add them at the end so their delicate texture stays fresh and crisp.",
 	placement: "Arrange a small handful of microgreens on top of the finished breakfast bowl.",
 	product: "Sunflower Microgreens"
-};
-useCases[6] = {
-	name: "Soup",
-	image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWfa_z_LyJQcUbInuHuzeVULIgrjJy6gSCEZIZtn9ym_QfeyI-CZ2xDfvb&s=10",
-	text: "Add a fresh finishing touch to a warm bowl of soup with a small handful of microgreens. Their delicate leaves and fresh flavour create a light contrast with the warmth and richness of the soup. Microgreens can work with familiar soups such as vegetable soup, tomato soup or clear soups, making them an easy addition to an everyday meal.",
-	placement: "Pour the prepared soup into a bowl and place the microgreens on top just before serving. Add them at the end to help retain their fresh texture.",
-	product: "Pea Shoot Microgreens — their fresh, crisp and subtly sweet character pairs naturally with warm soups."
 };
 export const storageTips = "Keep your microgreens refrigerated after receiving them to help maintain their freshness, texture and appearance. Store them in their appropriate container and handle them gently to avoid damaging the delicate leaves and stems. Avoid excess moisture, as too much moisture can affect freshness. Take out only the amount you plan to use and return the remaining greens to the refrigerator. For the best texture and flavour, enjoy them while they are fresh and crisp. Always follow the specific storage instructions provided with your microgreens and packaging.";

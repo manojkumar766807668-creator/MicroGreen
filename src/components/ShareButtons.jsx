@@ -1,13 +1,9 @@
-import { Link2, Share2, MessageCircle, Facebook, Instagram } from "lucide-react";
+import { Share2 } from "lucide-react";
 import { useToast } from "./ui";
-import { copyLink, nativeShare, shareLinks } from "../utils/sharing";
-import { siteConfig as c } from "../config/siteConfig";
-export default function ShareButtons({ title }) {
+import { nativeShare } from "../utils/sharing";
+export default function ShareButtons() {
   const [toast, show] = useToast();
-  const url = window.location.href, l = shareLinks(url, title);
-  return <div className="share"><span className="small">Share</span>
-    <button type="button" onClick={() => nativeShare(url, title, show)} aria-label="Share"><Share2 size={18} /></button>
-    <a href={l.wa} target="_blank" rel="noreferrer" aria-label="Share on WhatsApp"><MessageCircle size={18} /></a>
-    <a href={l.fb} target="_blank" rel="noreferrer" aria-label="Share on Facebook"><Facebook size={18} /></a>
-    <a href="https://www.instagram.com/direct/new/" onClick={() => copyLink(url, show)} target="_blank" rel="noreferrer" aria-label="Share on Instagram"><Instagram size={18} /></a>{toast}</div>
+  const url = window.location.href;
+  return <div className="share">
+    <button className="btn outline" type="button" onClick={() => nativeShare(url, document.title, show)} aria-label="Share product"><Share2 size={18} /> Share</button>{toast}</div>
 }

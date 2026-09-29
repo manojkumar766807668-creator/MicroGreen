@@ -3,7 +3,7 @@ import { WhatIs, Versus, Why, Trust, FAQ } from "../components/sections";
 import { useSEO } from "../hooks/useSEO";
 
 const reasons = [
-  ["01", "Nutrient-Rich", "Many varieties contain important nutrients and naturally occurring antioxidants. Their nutritional composition varies by variety, growing conditions, and harvest stage."],
+  ["01", "Naturally Nourishing", "Microgreens contain naturally occurring nutrients. Their nutritional composition varies by variety, growing conditions, and harvest stage, so they are best understood as one part of a varied diet."],
   ["02", "Fresh & Flavorful", "Microgreens add fresh flavor, color, and texture to everyday meals without requiring large quantities."],
   ["03", "Easy to Add to Meals", "Add them to salads, sandwiches, wraps, soups, smoothies, rice dishes, poha, breakfast bowls, and many other recipes."],
   ["04", "Variety of Choices", "Broccoli, radish, sunflower, pea shoots, mustard, beetroot, and coriander offer different tastes, colors, and textures."],
