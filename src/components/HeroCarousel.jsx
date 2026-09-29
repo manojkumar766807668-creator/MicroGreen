@@ -32,15 +32,13 @@ export default function HeroCarousel() {
         {slides.map((s, i) => { const T = i === 0 ? "h1" : "h2"; return (
           <div key={s.label} className={`hero-slide ${i === n ? "on" : ""}`} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${slides.length}`} aria-hidden={i !== n}>
             <p className="label">{t(s.label)}</p><T className="hero-title">{t(s.title[0])}<br />{t(s.title[1])}</T><p className="lead">{t(s.text)}</p>
-            <div className="row"><Btn to={s.a[0]}>{s.a[1]}</Btn><Btn to={s.b[0]} variant="ghost">{s.b[1]}</Btn></div>
+            <div className="row"><Btn to={s.a[0]}>{s.a[1]}</Btn></div>
           </div>); })}
       </div>
       <div className="hero-ctl">
-        <button onClick={() => go(-1)} aria-label="Previous slide"><ChevronLeft /></button>
         {slides.map((s, i) => <button key={s.label} className={`dot ${i === n ? "on" : ""}`} onClick={() => setN(i)} aria-label={`Go to slide ${i + 1}`} aria-current={i === n} />)}
-        <button onClick={() => go(1)} aria-label="Next slide"><ChevronRight /></button>
       </div>
-      <a href="#what" className="scroll">Discover ↓</a>
+      <a href="#what" className="scroll">Learn Some about Microgreen</a>
     </section>
   );
 }
