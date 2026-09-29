@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { Sprout, Leaf, Wheat, Heart, Share2, ArrowRight } from "lucide-react";
+import { Sprout, Leaf, Wheat, Heart, Share2, ArrowRight, MessageCircle } from "lucide-react";
 import { Btn, Reveal, Img, Heading, useToast } from "./ui";
 import ProductCard, { EmptyProducts } from "./ProductCard";
 import FAQAccordion from "./FAQAccordion";
@@ -9,7 +9,10 @@ import { useCases } from "../data/useCases";
 import { faqs } from "../data/faqs";
 import { nativeShare } from "../utils/sharing";
 import { req } from "../config/siteConfig";
+import { siteConfig } from "../config/siteConfig";
 import { useLanguage } from "../config/i18n";
+import { waLink } from "../utils/whatsapp";
+import logo from "../assets/logo.jpeg";
 import FarmVisitForm from "./FarmVisitForm";
 
 const stages = [
@@ -124,5 +127,5 @@ export function ShareBand() {
 }
 
 export function FAQ() {
-  return <section id="faq" className="sec"><div className="wrap narrow"><Heading title="Questions, answered" /><FAQAccordion items={faqs} /></div></section>;
+  return <section id="faq" className="sec faq-home"><div className="wrap"><div className="faq-home-layout"><div className="faq-home-intro"><p className="label">FAQ / Help</p><h2>Quick answers,<br/>simply explained</h2><p>Everything you need to know about our microgreens, from growing to storage, usage and farm visits.</p><div className="faq-home-art"><img src={logo} alt="mini's greens" /></div></div><div className="faq-home-content"><FAQAccordion items={faqs}/><div className="faq-help"><span className="faq-help-icon"><MessageCircle size={22}/></span><div><strong>Still have a question?</strong><p>We’re happy to help on WhatsApp.</p></div><a href={waLink(siteConfig.whatsappGreeting)}> <MessageCircle size={17}/> WhatsApp us <ArrowRight size={17}/></a></div></div></div></div></section>;
 }
