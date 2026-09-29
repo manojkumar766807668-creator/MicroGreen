@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavLink, Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { languages, useLanguage } from "../config/i18n";
 
@@ -16,6 +16,7 @@ export default function Navbar() {
   useEffect(() => { setOpen(false); setMoreOpen(false); }, [pathname]);
   useEffect(() => { document.body.style.overflow = open ? "hidden" : ""; const k = (e) => e.key === "Escape" && setOpen(false); window.addEventListener("keydown", k); return () => window.removeEventListener("keydown", k); }, [open]);
   const overHero = pathname === "/" && !scrolled && !open;
+  const activeSection = pathname === "/" ? (hash || "#home") : "";
   const handleNavClick = (event, to) => {
     setOpen(false);
     const target = new URL(to, window.location.origin);
@@ -23,7 +24,13 @@ export default function Navbar() {
       event.preventDefault();
       if (target.hash) {
         const id = decodeURIComponent(target.hash.slice(1));
-        requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" }));
+        requestAnimationFrame(() => {
+          const section = document.getElementById(id);
+          if (!section) return;
+          const navHeight = document.querySelector(".nav")?.getBoundingClientRect().height ?? 0;
+          const top = section.getBoundingClientRect().top + window.scrollY - navHeight;
+          window.scrollTo({ top, behavior: "smooth" });
+        });
       } else window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     }
   };
@@ -33,7 +40,11 @@ export default function Navbar() {
         <Link to="/#home" onClick={(event) => handleNavClick(event, "/#home")} className="brand" aria-label="mini's greens home">mini's greens</Link>
         {open && <button className="menu-backdrop" aria-label="Close menu" onClick={() => setOpen(false)} />}
         <nav id="menu" className={`menu ${open ? "open" : ""}`} aria-label="Main">
-          {links.map(([to, text]) => <NavLink key={to} to={to} onClick={(event) => handleNavClick(event, to)} className="navlink">{t(text)}</NavLink>)}
+          {links.map(([to, text]) => {
+            const section = to.slice(to.indexOf("#"));
+            const active = activeSection === section;
+            return <Link key={to} to={to} onClick={(event) => handleNavClick(event, to)} className={`navlink${active ? " active" : ""}`} aria-current={active ? "page" : undefined}>{t(text)}</Link>;
+          })}
           <div className={`learn-menu ${moreOpen ? "open" : ""}`} onMouseEnter={() => setMoreOpen(true)} onMouseLeave={() => setMoreOpen(false)}>
             <button type="button" className="learn-toggle navlink" aria-expanded={moreOpen} aria-label="Learn menu" onClick={() => setMoreOpen(value => !value)}>Learn <ChevronDown size={15} aria-hidden="true"/></button>
             <div className="learn-dropdown" aria-label="Learn">

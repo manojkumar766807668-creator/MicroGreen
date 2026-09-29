@@ -12,7 +12,13 @@ export default function App() {
   useEffect(() => {
     if (!hash) { window.scrollTo({ top: 0, left: 0, behavior: "instant" }); return; }
     const id = decodeURIComponent(hash.slice(1));
-    requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" }));
+    requestAnimationFrame(() => {
+      const target = document.getElementById(id);
+      if (!target) return;
+      const navHeight = document.querySelector(".nav")?.getBoundingClientRect().height ?? 0;
+      const top = target.getBoundingClientRect().top + window.scrollY - navHeight;
+      window.scrollTo({ top, behavior: "smooth" });
+    });
   }, [pathname, hash]);
   return <>
     <a href="#main" className="skip">Skip to content</a><Navbar />
