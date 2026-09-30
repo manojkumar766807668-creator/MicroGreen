@@ -10,9 +10,11 @@ import { PageHero } from "./components/ui";
 export default function App() {
   const { pathname, hash } = useLocation();
   const scrollFloor = useRef(null);
+  const pendingSection = useRef(null);
   const navigateToSection = useCallback((id) => {
     const target = document.getElementById(id);
-    if (!target) return;
+    if (!target) { pendingSection.current = id; return; }
+    pendingSection.current = null;
     const margin = Number.parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
     const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - margin);
     scrollFloor.current = top;
@@ -57,6 +59,14 @@ export default function App() {
     requestAnimationFrame(() => {
       const target = document.getElementById(id);
       if (!target) return;
+      if (pendingSection.current === id) {
+        const margin = Number.parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+        const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - margin);
+        scrollFloor.current = top;
+        pendingSection.current = null;
+        window.scrollTo({ top, behavior: "instant" });
+        return;
+      }
       target.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   }, [pathname, hash]);
