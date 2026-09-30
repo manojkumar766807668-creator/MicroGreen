@@ -38,7 +38,6 @@ export default function HeroCarousel() {
       <div className="hero-ctl">
         {slides.map((s, i) => <button key={s.label} className={`dot ${i === n ? "on" : ""}`} onClick={() => setN(i)} aria-label={`Go to slide ${i + 1}`} aria-current={i === n} />)}
       </div>
-      <a href="#what" className="scroll">Learn Some about Microgreen</a>
     </section>
   );
 }
