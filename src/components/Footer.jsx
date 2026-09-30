@@ -2,11 +2,12 @@ import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/logo.jpeg";
 import { siteConfig as c } from "../config/siteConfig";
 
-export default function Footer() {
+export default function Footer({ onSectionNavigate }) {
   const location = useLocation();
   const sectionClick = (event, href) => {
     const target = new URL(href, window.location.origin);
     const id = decodeURIComponent(target.hash.slice(1));
+    if (target.origin === window.location.origin && id) onSectionNavigate?.(id);
     if (target.pathname === location.pathname && id && target.hash === location.hash) {
       event.preventDefault();
       requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" }));

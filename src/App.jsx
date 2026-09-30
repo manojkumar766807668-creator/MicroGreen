@@ -19,6 +19,9 @@ export default function App() {
     window.scrollTo({ top, behavior: "instant" });
   }, []);
   useEffect(() => {
+    scrollFloor.current = null;
+  }, [pathname]);
+  useEffect(() => {
     let touchStartY = 0;
     const blockScrollAboveFloor = (event) => {
       if (scrollFloor.current !== null && window.scrollY <= scrollFloor.current + 2 && event.deltaY < 0) {
@@ -65,5 +68,5 @@ export default function App() {
         <Route path="/our-process" element={<Navigate to="/#growing-process" replace />} /><Route path="/why-microgreens" element={<Navigate to="/#why-microgreens" replace />} />
         <Route path="/what-are-microgreens" element={<Navigate to="/#what-are-microgreens" replace />} /><Route path="/how-to-use" element={<Navigate to="/#how-to-eat" replace />} /><Route path="/farm-visits" element={<Navigate to="/#farm-visit" replace />} />
         <Route path="*" element={<PageHero title="Page not found" sub="The page you requested does not exist." />} /></Routes></main>
-    <Footer /><WhatsAppButton /></>;
+    <Footer onSectionNavigate={navigateToSection} /><WhatsAppButton /></>;
 }
