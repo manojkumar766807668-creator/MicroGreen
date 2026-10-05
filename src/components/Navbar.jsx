@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { languages, useLanguage } from "../config/i18n";
+import logo from "../assets/logo.jpeg";
 
-const links = [["/#home", "Home"], ["/#products", "Products"], ["/#about", "About"], ["/#contact", "Contact"]];
-const learnLinks = [["/what-are-microgreens", "What are microgreens?"], ["/our-process", "How we grow"], ["/how-to-use", "How to eat them"], ["/why-microgreens", "Why microgreens"], ["/#farm-visit", "Farm Visit"]];
+const links = [["/#home", "Home"], ["/products", "Products"], ["/about", "About"], ["/contact", "Contact"]];
+const learnLinks = [["/what-are-microgreens", "What are microgreens?"], ["/our-process", "How we grow"], ["/how-to-use", "How to eat them"], ["/why-microgreens", "Why microgreens"], ["/farm-visits", "Farm Visit"]];
 
 export default function Navbar({ onSectionNavigate }) {
   const [open, setOpen] = useState(false);
@@ -43,12 +44,12 @@ export default function Navbar({ onSectionNavigate }) {
   return (
     <header className={`nav ${overHero ? "over-hero" : "solid"}`}>
       <div className="wrap nav-in">
-        <Link to="/#home" onClick={(event) => handleNavClick(event, "/#home")} className="brand" aria-label="mini's greens home">mini's greens</Link>
+        <Link to="/#home" onClick={(event) => handleNavClick(event, "/#home")} className="brand" aria-label="mini's greens home"><img src={logo} alt="mini's greens" /></Link>
         {open && <button className="menu-backdrop" aria-label="Close menu" onClick={() => setOpen(false)} />}
         <nav id="menu" className={`menu ${open ? "open" : ""}`} aria-label="Main">
           {links.map(([to, text]) => {
             const section = to.slice(to.indexOf("#"));
-            const active = activeSection === section;
+            const active = to.includes("#") ? activeSection === section : pathname === to;
             return <Link key={to} to={to} onClick={(event) => handleNavClick(event, to)} className={`navlink${active ? " active" : ""}`} aria-current={active ? "page" : undefined}>{t(text)}</Link>;
           })}
           <div className={`learn-menu ${moreOpen ? "open" : ""}`} onMouseEnter={() => setMoreOpen(true)} onMouseLeave={() => setMoreOpen(false)}>

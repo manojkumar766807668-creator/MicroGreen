@@ -4,9 +4,7 @@ import { Btn } from "./ui";
 import { useLanguage } from "../config/i18n";
 
 const slides = [
-  { label: "mini's greens", title: ["Small greens.", "Big everyday possibilities."], text: "Discover fresh microgreens grown with care.", a: ["/products", "Explore Products"], b: ["/farm-visits", "Plan a Farm Visit"] },
-  { label: "What are microgreens?", title: ["Tiny plants.", "Big stage."], text: "See how a seed becomes a microgreen.", a: ["/why-microgreens", "Why Microgreens"], b: ["/our-process", "Our Process"] },
-  { label: "Farm visits", title: ["Come see where", "the greens begin."], text: "Plan a visit to the farm.", a: ["/farm-visits", "Plan Your Visit"], b: ["/how-to-use", "How to Use"] }
+  { label: "mini's greens", title: ["Small greens.", "Big everyday possibilities."], text: "Discover what microgreens are, how they grow, and how to enjoy them in familiar meals.", a: ["/products", "Explore Products"] }
 ];
 
 export default function HeroCarousel() {

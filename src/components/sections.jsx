@@ -52,14 +52,13 @@ function StageIllustration({ stage }) {
 }
 
 const vs = {
-  micro: ["Microgreens", "Microgreens are young edible plants harvested after their first leaves and stems have developed. They are grown in a growing medium and cut above it, with both the tender leaves and stem eaten. They are harvested later than sprouts and can be added to salads, sandwiches, wraps, bowls, breakfast dishes, and other everyday meals.", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTVH1qt_hdBC45QPs0SXGfZGFu-6izjKrbU9ufpL-lr4eT--9yMyNl7n8D&s=10"],
-  sprout: ["Sprouts", "Sprouts are at an earlier stage of plant growth, beginning from a germinated seed before the plant develops into a leafy young plant. They are commonly eaten as a whole germinated seed with the young root and shoot. Their fresh, crunchy texture makes them suitable for salads, sandwiches, bowls, and other everyday dishes.", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjpYPqqq1fiRspW1oqxxQZKTnq7q7nskjmesH3hJFf8w&s=10"]
+  micro: { title: "Microgreens", image: "/microgreens-comparison.jpg", points: ["Young leafy plant after first leaves develop", "Leaves and stem are cut above the growing medium", "Tender texture; used as a fresh topping"] },
+  sprout: { title: "Sprouts", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnkX5vnaHiilQXhUaL7Mjbs6q6u4_2BH0HujrRGIHxeA&s=10", points: ["Earlier stage, soon after seed germination", "Whole germinated seed, root and shoot are eaten", "Moist, crisp texture; often added to meals"] }
 };
 export function Versus() {
-  const [on, setOn] = useState("micro");
+  const [open, setOpen] = useState({});
   return <section className="sec cream"><div className="wrap"><Heading title="Microgreens vs sprouts">Microgreens grow beyond germination. Compare their growth stage and what is harvested.</Heading>
-    <div className="vs">{Object.entries(vs).map(([k, [t, d]]) => (
-      <button key={k} className={`vs-panel ${k} ${on === k ? "on" : ""}`} style={{ "--vs-image": `url("${vs[k][2]}")` }} aria-pressed={on === k} onClick={() => setOn(k)}><h3>{t}</h3><p>{d}</p></button>))}</div></div></section>;
+    <div className="vs comparison-grid">{Object.entries(vs).map(([key, item]) => <article key={key} className="comparison-card"><img src={item.image} alt={`${item.title} close-up`} loading="lazy"/><div className="comparison-copy"><h3>{item.title}</h3><ul>{item.points.map(point => <li key={point}>{point}</li>)}</ul><button className="comparison-toggle" type="button" aria-expanded={!!open[key]} onClick={() => setOpen(v => ({...v,[key]:!v[key]}))}>More comparison details</button><div className={`comparison-more ${open[key] ? "expanded" : ""}`}><p>{key === "micro" ? "Microgreens are harvested after leaves develop; they are cut above the medium." : "Sprouts are harvested earlier and generally eaten as a whole germinated seed."}</p></div></div></article>)}</div></div></section>;
 }
 
 const why = [
@@ -82,8 +81,8 @@ export function Trust() {
 }
 
 export function Featured() {
-  return <section className="sec" id="products"><div className="wrap"><Heading label="Our greens" title="Find a green for your table.">Compare taste, texture, pack details, and price enquiries across our microgreens.</Heading>
-    {products.length ? <div className="featured-product-grid">{products.map((p, i) => <Reveal key={p.id} delay={i * 40} className="pgrid-i"><ProductCard p={p} /></Reveal>)}</div> : <EmptyProducts />}
+  return <section className="sec" id="products"><div className="wrap"><Heading label="Our greens" title="Find a green for your table.">Explore a few of our microgreens. Open a product to learn more.</Heading>
+    {products.length ? <div className="featured-product-grid">{products.slice(0, 6).map((p, i) => <Reveal key={p.id} delay={i * 40} className="pgrid-i"><ProductCard p={p} feature /></Reveal>)}</div> : <EmptyProducts />}
   </div></section>;
 }
 

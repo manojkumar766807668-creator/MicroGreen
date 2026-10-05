@@ -17,8 +17,8 @@ export default function About() {
   return <div className="about-page">
     <section className="about-hero">
       <div className="wrap about-hero-in">
-        <Reveal><p className="label">About mini's greens</p><h1>Fresh greens<br /><em>for everyday living.</em></h1><p className="small">By Manoj Kumar</p></Reveal>
-        <Reveal delay={120} className="about-hero-note"><p>Small plants, thoughtful growing and simple ways to make everyday food feel fresher.</p><ArrowUpRight aria-hidden="true" /></Reveal>
+        <Reveal className="about-hero-copy"><p className="label">A little about us</p><h1>Growing a greener everyday.</h1><p className="about-hero-lead">We make microgreens easier to understand, enjoy, and bring into the meals you already love.</p><p className="small about-byline">mini’s greens <span>·</span> Hyderabad</p><Btn to="/our-process">See how we grow</Btn></Reveal>
+        <Reveal delay={120} className="about-hero-visual"><img src={c.contactImage} alt="Fresh young greens growing in a tray"/><div className="about-hero-note"><span>From seed<br/>to everyday food</span><ArrowUpRight aria-hidden="true" /></div></Reveal>
       </div>
     </section>
 

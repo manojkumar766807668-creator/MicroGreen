@@ -2,6 +2,8 @@ import { useState } from "react";
 import { ArrowRight, Heart, Leaf, Mail, MapPin, MessageCircle, Phone, Sprout } from "lucide-react";
 import { siteConfig } from "../config/siteConfig";
 import { waLink } from "../utils/whatsapp";
+import FAQAccordion from "../components/FAQAccordion";
+import { faqs } from "../data/faqs";
 
 export default function Contact() {
   const c = siteConfig;
@@ -11,7 +13,7 @@ export default function Contact() {
     const body = `Hello mini's greens,\n\nName: ${form.name}\nPhone / Email: ${form.reply}\n\n${form.message}`;
     window.open(waLink(body), "_blank", "noopener,noreferrer");
   };
-  return <section className="sec contact-home"><div className="wrap">
+  return <><section className="sec contact-home"><div className="wrap">
     <div className="contact-home-layout">
       <div className="contact-story">
         <div className="contact-story-photo"><img className="contact-story-image" src={c.contactImage} alt="Fresh microgreens growing at the farm"/><div className="contact-story-copy"><p className="label">Get in touch</p><h2>Come say hello</h2><p>Have questions about our products, planning a farm visit, or anything else? We’d love to hear from you.</p><div className="contact-story-notes"><span><Sprout/>Freshly grown<br/>in Hyderabad</span><span><Heart/>Healthy food<br/>for brighter days</span><span><Leaf/>Visit our farm<br/>by appointment</span></div></div></div>
@@ -39,5 +41,5 @@ export default function Contact() {
         </div>
       </div>
     </div>
-  </div></section>;
+  </div></section><section id="faq" className="sec"><div className="wrap contact-faq"><p className="label">A few quick answers</p><h2>Frequently asked questions</h2><FAQAccordion items={faqs}/></div></section></>;
 }
